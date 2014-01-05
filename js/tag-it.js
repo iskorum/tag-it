@@ -232,7 +232,12 @@
                         } else if (that.options.removeConfirmation) {
                             tag.addClass('remove ui-state-highlight');
                         }
-                    } else if (that.options.removeConfirmation) {
+                    }
+                });
+
+            this.tagInput
+                .keypress(function(event) {
+                    if (that.options.removeConfirmation) {
                         that._lastTag().removeClass('remove ui-state-highlight');
                     }
 
@@ -240,13 +245,10 @@
                     // except when there is an open quote or if setting allowSpaces = true.
                     // Tab will also create a tag, unless the tag input is empty,
                     // in which case it isn't caught.
+                    // 44 is comma
                     if (
-                        (event.which === $.ui.keyCode.COMMA && event.shiftKey === false) ||
+                        (event.which === 44 && event.shiftKey === false) ||
                         event.which === $.ui.keyCode.ENTER ||
-                        (
-                            event.which == $.ui.keyCode.TAB &&
-                            that.tagInput.val() !== ''
-                        ) ||
                         (
                             event.which == $.ui.keyCode.SPACE &&
                             that.options.allowSpaces !== true &&
@@ -588,4 +590,3 @@
 
     });
 })(jQuery);
-
